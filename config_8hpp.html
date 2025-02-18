@@ -106,13 +106,14 @@ $(document).ready(function(){initNavTree('config_8hpp.html',''); initResizable()
 <code>#include &quot;quickcpplib/import.h&quot;</code><br />
 <code>#include &quot;quickcpplib/config.hpp&quot;</code><br />
 <code>#include &quot;quickcpplib/utils/thread.hpp&quot;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
 <code>#include &lt;ctime&gt;</code><br />
 <code>#include &quot;quickcpplib/bitfield.hpp&quot;</code><br />
 <code>#include &quot;quickcpplib/scope.hpp&quot;</code><br />
 <code>#include &quot;quickcpplib/span.hpp&quot;</code><br />
-<code>#include &quot;quickcpplib/optional.hpp&quot;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 <code>#include &quot;quickcpplib/byte.hpp&quot;</code><br />
-<code>#include &quot;quickcpplib/string_view.hpp&quot;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
 <code>#include &quot;quickcpplib/function_ptr.hpp&quot;</code><br />
 <code>#include &quot;quickcpplib/mem_flush_loads_stores.hpp&quot;</code><br />
 <code>#include &quot;quickcpplib/start_lifetime_as.hpp&quot;</code><br />
@@ -199,6 +200,9 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_V2_NAMESPACE_END</b>&#160;&#160;&#160;}</td></tr>
 <tr class="memdesc:ga84df5d479525cd6b58f873c2f9869b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands into the appropriate namespace markup to exit the LLFIO v2 namespace. <br /></td></tr>
 <tr class="separator:ga84df5d479525cd6b58f873c2f9869b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f14147b25513e492560a364f3ee8e1" id="r_a71f14147b25513e492560a364f3ee8e1"><td class="memItemLeft" align="right" valign="top"><a id="a71f14147b25513e492560a364f3ee8e1" name="a71f14147b25513e492560a364f3ee8e1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_USING_STD_FILESYSTEM</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a71f14147b25513e492560a364f3ee8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a163aaaaa4d238aebd5fb9acec82006dd" id="r_a163aaaaa4d238aebd5fb9acec82006dd"><td class="memItemLeft" align="right" valign="top"><a id="a163aaaaa4d238aebd5fb9acec82006dd" name="a163aaaaa4d238aebd5fb9acec82006dd"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_DECL</b></td></tr>
 <tr class="separator:a163aaaaa4d238aebd5fb9acec82006dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,9 +248,43 @@ Macros</h2></td></tr>
 <tr class="memitem:a40c15a3fc44361077b478acbfaca18ee" id="r_a40c15a3fc44361077b478acbfaca18ee"><td class="memItemLeft" align="right" valign="top"><a id="a40c15a3fc44361077b478acbfaca18ee" name="a40c15a3fc44361077b478acbfaca18ee"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_HEADERS_ONLY_VIRTUAL_SPEC</b>&#160;&#160;&#160;virtual</td></tr>
 <tr class="separator:a40c15a3fc44361077b478acbfaca18ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9d0367577522e50877670bd651905d9" id="r_af9d0367577522e50877670bd651905d9"><td class="memItemLeft" align="right" valign="top"><a id="af9d0367577522e50877670bd651905d9" name="af9d0367577522e50877670bd651905d9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_EXCEPTION_TRY</b>&#160;&#160;&#160;if(true)</td></tr>
+<tr class="separator:af9d0367577522e50877670bd651905d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d01dd4bcd73f86288ebc9d34f225099" id="r_a9d01dd4bcd73f86288ebc9d34f225099"><td class="memItemLeft" align="right" valign="top"><a id="a9d01dd4bcd73f86288ebc9d34f225099" name="a9d01dd4bcd73f86288ebc9d34f225099"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_EXCEPTION_CATCH</b>(init, ...)&#160;&#160;&#160;else if(__VA_ARGS__ = init; false)</td></tr>
+<tr class="separator:a9d01dd4bcd73f86288ebc9d34f225099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6486091de4c43957dd1837198cb51218" id="r_a6486091de4c43957dd1837198cb51218"><td class="memItemLeft" align="right" valign="top"><a id="a6486091de4c43957dd1837198cb51218" name="a6486091de4c43957dd1837198cb51218"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_EXCEPTION_CATCH_ALL</b>&#160;&#160;&#160;else if(false)</td></tr>
+<tr class="separator:a6486091de4c43957dd1837198cb51218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13b73ff9152ecb709a4f4ab816347c26" id="r_a13b73ff9152ecb709a4f4ab816347c26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8hpp.html#a13b73ff9152ecb709a4f4ab816347c26">LLFIO_EXCEPTION_THROW</a>(...)</td></tr>
+<tr class="separator:a13b73ff9152ecb709a4f4ab816347c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b9f32149ec6977ec5d8fb038dd3509" id="r_a04b9f32149ec6977ec5d8fb038dd3509"><td class="memItemLeft" align="right" valign="top"><a id="a04b9f32149ec6977ec5d8fb038dd3509" name="a04b9f32149ec6977ec5d8fb038dd3509"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LLFIO_EXCEPTION_RETHROW</b></td></tr>
+<tr class="separator:a04b9f32149ec6977ec5d8fb038dd3509"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:aa94e1ec116955e75221a37a0ba0e8626" id="r_aa94e1ec116955e75221a37a0ba0e8626"><td class="memTemplParams" colspan="2"><a id="aa94e1ec116955e75221a37a0ba0e8626" name="aa94e1ec116955e75221a37a0ba0e8626"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:aa94e1ec116955e75221a37a0ba0e8626"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>llfio_v2_xxx::optional</b> = std::optional&lt; T &gt;</td></tr>
+<tr class="separator:aa94e1ec116955e75221a37a0ba0e8626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada93a14f6828aa80b5c936e7aa8d5197" id="r_ada93a14f6828aa80b5c936e7aa8d5197"><td class="memTemplParams" colspan="2"><a id="ada93a14f6828aa80b5c936e7aa8d5197" name="ada93a14f6828aa80b5c936e7aa8d5197"></a>
+template&lt;typename charT , typename traits  = std::char_traits&lt;charT&gt;&gt; </td></tr>
+<tr class="memitem:ada93a14f6828aa80b5c936e7aa8d5197"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>llfio_v2_xxx::basic_string_view</b> = std::basic_string_view&lt; charT, traits &gt;</td></tr>
+<tr class="separator:ada93a14f6828aa80b5c936e7aa8d5197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31f9d992e5d11f20e94456ee3a78d3fb" id="r_a31f9d992e5d11f20e94456ee3a78d3fb"><td class="memItemLeft" align="right" valign="top"><a id="a31f9d992e5d11f20e94456ee3a78d3fb" name="a31f9d992e5d11f20e94456ee3a78d3fb"></a>
+typedef basic_string_view&lt; char, std::char_traits&lt; char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>llfio_v2_xxx::string_view</b></td></tr>
+<tr class="separator:a31f9d992e5d11f20e94456ee3a78d3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc40afa2aa8ad5db02ae7a098e2c797" id="r_aecc40afa2aa8ad5db02ae7a098e2c797"><td class="memItemLeft" align="right" valign="top"><a id="aecc40afa2aa8ad5db02ae7a098e2c797" name="aecc40afa2aa8ad5db02ae7a098e2c797"></a>
+typedef basic_string_view&lt; wchar_t, std::char_traits&lt; wchar_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>llfio_v2_xxx::wstring_view</b></td></tr>
+<tr class="separator:aecc40afa2aa8ad5db02ae7a098e2c797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10657696dab0955fbdd4b58656455a49" id="r_a10657696dab0955fbdd4b58656455a49"><td class="memItemLeft" align="right" valign="top"><a id="a10657696dab0955fbdd4b58656455a49" name="a10657696dab0955fbdd4b58656455a49"></a>
+typedef basic_string_view&lt; char16_t, std::char_traits&lt; char16_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>llfio_v2_xxx::u16string_view</b></td></tr>
+<tr class="separator:a10657696dab0955fbdd4b58656455a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed49a8482c70b2b44140565bd79cbecd" id="r_aed49a8482c70b2b44140565bd79cbecd"><td class="memItemLeft" align="right" valign="top"><a id="aed49a8482c70b2b44140565bd79cbecd" name="aed49a8482c70b2b44140565bd79cbecd"></a>
+typedef basic_string_view&lt; char32_t, std::char_traits&lt; char32_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>llfio_v2_xxx::u32string_view</b></td></tr>
+<tr class="separator:aed49a8482c70b2b44140565bd79cbecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23358ae319d76dd1149a26b04b17796a" id="r_a23358ae319d76dd1149a26b04b17796a"><td class="memTemplParams" colspan="2"><a id="a23358ae319d76dd1149a26b04b17796a" name="a23358ae319d76dd1149a26b04b17796a"></a>
 template&lt;class F , size_t callable_storage_bytes = 32 - sizeof(uintptr_t)&gt; </td></tr>
 <tr class="memitem:a23358ae319d76dd1149a26b04b17796a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>llfio_v2_xxx::function_ptr</b> = QUICKCPPLIB_NAMESPACE::function_ptr::function_ptr&lt; F, callable_storage_bytes &gt;</td></tr>
@@ -281,7 +319,34 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>llfio_v2_xxx::detai
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configures a compiler environment for LLFIO header and source code. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a13b73ff9152ecb709a4f4ab816347c26" name="a13b73ff9152ecb709a4f4ab816347c26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13b73ff9152ecb709a4f4ab816347c26">&#9670;&#160;</a></span>LLFIO_EXCEPTION_THROW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LLFIO_EXCEPTION_THROW</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">  {                                                                                                                                                            \</div>
+<div class="line">    fprintf(stderr, <span class="stringliteral">&quot;FATAL: throw &quot;</span> #__VA_ARGS__ <span class="stringliteral">&quot; at &quot;</span> __FILE__ <span class="stringliteral">&quot;:%d\n&quot;</span>, __LINE__);                                                                           \</div>
+<div class="line">    abort();                                                                                                                                                   \</div>
+<div class="line">  }</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="lineno">  462</span>  {                                                                                                                                                            \</div>
+<div class="line"><span class="lineno">  463</span>    fprintf(stderr, <span class="stringliteral">&quot;FATAL: throw &quot;</span> #__VA_ARGS__ <span class="stringliteral">&quot; at &quot;</span> __FILE__ <span class="stringliteral">&quot;:%d\n&quot;</span>, __LINE__);                                                                           \</div>
+<div class="line"><span class="lineno">  464</span>    abort();                                                                                                                                                   \</div>
+<div class="line"><span class="lineno">  465</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a72f59d68ca6762df70b426c4dc0b3fcc" name="a72f59d68ca6762df70b426c4dc0b3fcc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72f59d68ca6762df70b426c4dc0b3fcc">&#9670;&#160;</a></span>unsigned_integer_cast() <span class="overload">[1/3]</span></h2>
 
@@ -307,9 +372,9 @@ template&lt;class T , typename std::enable_if&lt;(std::is_unsigned&lt; T &gt;::v
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  450</span>  {</div>
-<div class="line"><span class="lineno">  451</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(0);</div>
-<div class="line"><span class="lineno">  452</span>  }</div>
+<div class="fragment"><div class="line"><span class="lineno">  382</span>  {</div>
+<div class="line"><span class="lineno">  383</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(0);</div>
+<div class="line"><span class="lineno">  384</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -338,9 +403,9 @@ template&lt;class T , class U , typename std::enable_if&lt;(std::is_unsigned&lt;
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  444</span>  {</div>
-<div class="line"><span class="lineno">  445</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(v);</div>
-<div class="line"><span class="lineno">  446</span>  }</div>
+<div class="fragment"><div class="line"><span class="lineno">  376</span>  {</div>
+<div class="line"><span class="lineno">  377</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(v);</div>
+<div class="line"><span class="lineno">  378</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -369,9 +434,9 @@ template&lt;class T , class U , typename std::enable_if&lt;(std::is_unsigned&lt;
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">  456</span>  {</div>
-<div class="line"><span class="lineno">  457</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(<span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(v));</div>
-<div class="line"><span class="lineno">  458</span>  }</div>
+<div class="fragment"><div class="line"><span class="lineno">  388</span>  {</div>
+<div class="line"><span class="lineno">  389</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(<span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(v));</div>
+<div class="line"><span class="lineno">  390</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>

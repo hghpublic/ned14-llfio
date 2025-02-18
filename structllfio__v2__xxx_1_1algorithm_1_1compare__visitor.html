@@ -482,7 +482,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="structllfio__v2__xxx_1_1algorithm_1_1summarize__visitor.html#ab86c255fec2afd2e81a506e405d01116">llfio_v2_xxx::algorithm::summarize_visitor</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   71</span>    {</div>
-<div class="line"><span class="lineno">   72</span>      <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">   72</span>      LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">   73</span>      {</div>
 <div class="line"><span class="lineno">   74</span>        <span class="keyword">auto</span> *state = (comparison_summary *) data;</div>
 <div class="line"><span class="lineno">   75</span>        comparison_summary acc;</div>
@@ -494,7 +494,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   81</span>        state-&gt;operator+=(acc);</div>
 <div class="line"><span class="lineno">   82</span>        <span class="keywordflow">return</span> success();</div>
 <div class="line"><span class="lineno">   83</span>      }</div>
-<div class="line"><span class="lineno">   84</span>      <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">   84</span>      LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">   85</span>      {</div>
 <div class="line"><span class="lineno">   86</span>        <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">   87</span>      }</div>

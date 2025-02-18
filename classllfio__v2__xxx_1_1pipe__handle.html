@@ -3485,7 +3485,7 @@ For portability, you can only assume that barriers write order for a single hand
 <p>Create a pipe handle creating a randomly named pipe on a path. The pipe is opened exclusively with <code>creation::only_if_not_exist</code> so it will never collide with nor overwrite any existing pipe.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX <code>open()</code>, <code>mkfifo()</code>, <code>NtCreateFile()</code> or <code>NtCreateNamedPipeFile()</code> can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  234</span>  {</div>
-<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  235</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  236</span>    {</div>
 <div class="line"><span class="lineno">  237</span>      <span class="keywordflow">for</span>(;;)</div>
 <div class="line"><span class="lineno">  238</span>      {</div>
@@ -3498,7 +3498,7 @@ For portability, you can only assume that barriers write order for a single hand
 <div class="line"><span class="lineno">  245</span>        }</div>
 <div class="line"><span class="lineno">  246</span>      }</div>
 <div class="line"><span class="lineno">  247</span>    }</div>
-<div class="line"><span class="lineno">  248</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  248</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  249</span>    {</div>
 <div class="line"><span class="lineno">  250</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  251</span>    }</div>

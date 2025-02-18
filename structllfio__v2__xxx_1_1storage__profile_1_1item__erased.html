@@ -211,7 +211,7 @@ template&lt;class U &gt; </div>
 <div class="line"><span class="lineno">  160</span>      <span class="keywordflow">case</span> storage_types::unknown:</div>
 <div class="line"><span class="lineno">  161</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  162</span>      }</div>
-<div class="line"><span class="lineno">  163</span>      <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;No type set in item&quot;</span>);  <span class="comment">// NOLINT</span></div>
+<div class="line"><span class="lineno">  163</span>      LLFIO_EXCEPTION_THROW(std::invalid_argument(<span class="stringliteral">&quot;No type set in item&quot;</span>));  <span class="comment">// NOLINT</span></div>
 <div class="line"><span class="lineno">  164</span>    }</div>
 <div class="ttc" id="astructllfio__v2__xxx_1_1storage__profile_1_1item__base_html_a948529cb03ceb639a2b5f9c7d20542eb"><div class="ttname"><a href="structllfio__v2__xxx_1_1storage__profile_1_1item__base.html#a948529cb03ceb639a2b5f9c7d20542eb">llfio_v2_xxx::storage_profile::item_base::type</a></div><div class="ttdeci">storage_types type</div><div class="ttdoc">The type of the value.</div><div class="ttdef"><b>Definition</b> storage_profile.hpp:93</div></div>
 </div><!-- fragment -->

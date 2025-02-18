@@ -716,7 +716,7 @@ template&lt;template&lt; class &gt; class Hasher = QUICKCPPLIB_NAMESPACE::algori
 <p>Initialises a shared filing system mutex using the file at <em>lockfile</em>. </p><dl class="section user"><dt>Errors returnable\n Awaiting the clang result&lt;&gt; AST parser which auto generates all the error codes which could occur,</dt><dd>but a particularly important one is <code>errc::no_lock_available</code> which will be returned if the lock is in use by another computer on a network. </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  196</span>      {</div>
 <div class="line"><span class="lineno">  197</span>        LLFIO_LOG_FUNCTION_CALL(0);</div>
-<div class="line"><span class="lineno">  198</span>        <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  198</span>        LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  199</span>        {</div>
 <div class="line"><span class="lineno">  200</span>          OUTCOME_TRY(<span class="keyword">auto</span> &amp;&amp;ret, <a class="code hl_function" href="classllfio__v2__xxx_1_1file__handle.html#a550d9252db3c099fb149b3e6f5b702b0">file_handle::file</a>(base, lockfile, file_handle::mode::write, file_handle::creation::if_needed, file_handle::caching::reads));</div>
 <div class="line"><span class="lineno">  201</span>          file_handle temph;</div>
@@ -784,7 +784,7 @@ template&lt;template&lt; class &gt; class Hasher = QUICKCPPLIB_NAMESPACE::algori
 <div class="line"><span class="lineno">  263</span>          lockinuse = std::move(lockinuse2);  <span class="comment">// releases exclusive lock on all three offsets</span></div>
 <div class="line"><span class="lineno">  264</span>          <span class="keywordflow">return</span> memory_map(std::move(ret), std::move(temph), std::move(lockinuse.value()), std::move(hmap), std::move(temphmap));</div>
 <div class="line"><span class="lineno">  265</span>        }</div>
-<div class="line"><span class="lineno">  266</span>        <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  266</span>        LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  267</span>        {</div>
 <div class="line"><span class="lineno">  268</span>          <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  269</span>        }</div>

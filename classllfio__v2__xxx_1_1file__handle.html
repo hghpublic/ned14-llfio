@@ -5798,7 +5798,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <p>Create a file handle creating a uniquely named file on a path. The file is opened exclusively with <code>creation::only_if_not_exist</code> so it will never collide with nor overwrite any existing file. Note also that caching defaults to temporary which hints to the OS to only flush changes to physical storage as lately as possible.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX open() or CreateFile() can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  177</span>  {</div>
-<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  178</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  179</span>    {</div>
 <div class="line"><span class="lineno">  180</span>      <span class="keywordflow">for</span>(;;)</div>
 <div class="line"><span class="lineno">  181</span>      {</div>
@@ -5811,7 +5811,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <div class="line"><span class="lineno">  188</span>        }</div>
 <div class="line"><span class="lineno">  189</span>      }</div>
 <div class="line"><span class="lineno">  190</span>    }</div>
-<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  191</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  192</span>    {</div>
 <div class="line"><span class="lineno">  193</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  194</span>    }</div>

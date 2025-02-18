@@ -3084,7 +3084,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <p>Create a symlink handle creating a uniquely named symlink on a path. The symlink is opened exclusively with <code>creation::only_if_not_exist</code> so it will never collide with nor overwrite any existing symlink.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX open() or CreateFile() can return,</dt><dd>or failure to allocate memory. </dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  468</span>  {</div>
-<div class="line"><span class="lineno">  469</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  469</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  470</span>    {</div>
 <div class="line"><span class="lineno">  471</span>      <span class="keywordflow">for</span>(;;)</div>
 <div class="line"><span class="lineno">  472</span>      {</div>
@@ -3097,7 +3097,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <div class="line"><span class="lineno">  479</span>        }</div>
 <div class="line"><span class="lineno">  480</span>      }</div>
 <div class="line"><span class="lineno">  481</span>    }</div>
-<div class="line"><span class="lineno">  482</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  482</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  483</span>    {</div>
 <div class="line"><span class="lineno">  484</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  485</span>    }</div>

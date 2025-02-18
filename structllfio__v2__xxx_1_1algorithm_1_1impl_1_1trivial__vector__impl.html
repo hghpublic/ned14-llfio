@@ -652,7 +652,7 @@ template&lt;bool has_default_construction, class T &gt; </div>
 <div class="fragment"><div class="line"><span class="lineno">  248</span>      {</div>
 <div class="line"><span class="lineno">  249</span>        <span class="keywordflow">if</span>(i &gt;= <a class="code hl_function" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a84a6bbb08480b7803a49e203b7501fa0">size</a>())</div>
 <div class="line"><span class="lineno">  250</span>        {</div>
-<div class="line"><span class="lineno">  251</span>          <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;bounds exceeded&quot;</span>);  <span class="comment">// NOLINT</span></div>
+<div class="line"><span class="lineno">  251</span>          LLFIO_EXCEPTION_THROW(std::out_of_range(<span class="stringliteral">&quot;bounds exceeded&quot;</span>));  <span class="comment">// NOLINT</span></div>
 <div class="line"><span class="lineno">  252</span>        }</div>
 <div class="line"><span class="lineno">  253</span>        <span class="keywordflow">return</span> _begin[i];</div>
 <div class="line"><span class="lineno">  254</span>      }</div>
@@ -690,7 +690,7 @@ template&lt;bool has_default_construction, class T &gt; </div>
 <div class="fragment"><div class="line"><span class="lineno">  257</span>      {</div>
 <div class="line"><span class="lineno">  258</span>        <span class="keywordflow">if</span>(i &gt;= <a class="code hl_function" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a84a6bbb08480b7803a49e203b7501fa0">size</a>())</div>
 <div class="line"><span class="lineno">  259</span>        {</div>
-<div class="line"><span class="lineno">  260</span>          <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;bounds exceeded&quot;</span>);  <span class="comment">// NOLINT</span></div>
+<div class="line"><span class="lineno">  260</span>          LLFIO_EXCEPTION_THROW(std::out_of_range(<span class="stringliteral">&quot;bounds exceeded&quot;</span>));  <span class="comment">// NOLINT</span></div>
 <div class="line"><span class="lineno">  261</span>        }</div>
 <div class="line"><span class="lineno">  262</span>        <span class="keywordflow">return</span> _begin[i];</div>
 <div class="line"><span class="lineno">  263</span>      }</div>
@@ -1111,14 +1111,14 @@ template&lt;class... Args&gt; </div>
 <div class="line"><span class="lineno">  435</span>        <span class="comment">// Trivially copyable, so memmove</span></div>
 <div class="line"><span class="lineno">  436</span>        memmove(pos._v + 1, pos._v, (_end - pos._v) * <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a6c613e9aeb765304262251d3aa10c945">value_type</a>));</div>
 <div class="line"><span class="lineno">  437</span>        <span class="comment">// BUT complex constructors may throw!</span></div>
-<div class="line"><span class="lineno">  438</span>        <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  438</span>        LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  439</span>        {</div>
 <div class="line"><span class="lineno">  440</span>          <span class="keyword">new</span>(pos._v) <a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a6c613e9aeb765304262251d3aa10c945">value_type</a>(std::forward&lt;Args&gt;(args)...);</div>
 <div class="line"><span class="lineno">  441</span>        }</div>
-<div class="line"><span class="lineno">  442</span>        <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  442</span>        LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  443</span>        {</div>
 <div class="line"><span class="lineno">  444</span>          memmove(pos._v, pos._v + 1, (_end - pos._v) * <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a6c613e9aeb765304262251d3aa10c945">value_type</a>));</div>
-<div class="line"><span class="lineno">  445</span>          <span class="keywordflow">throw</span>;</div>
+<div class="line"><span class="lineno">  445</span>          LLFIO_EXCEPTION_RETHROW;</div>
 <div class="line"><span class="lineno">  446</span>        }</div>
 <div class="line"><span class="lineno">  447</span>        ++_end;</div>
 <div class="line"><span class="lineno">  448</span>        <span class="keywordflow">return</span> <a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a4d56314037ed44e7ca2c6ed352a53fb4">iterator</a>(pos._v);</div>
@@ -2046,7 +2046,7 @@ template&lt;bool has_default_construction, class T &gt; </div>
 <div class="fragment"><div class="line"><span class="lineno">  314</span>      {</div>
 <div class="line"><span class="lineno">  315</span>        <span class="keywordflow">if</span>(n &gt; <a class="code hl_function" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a90fee73d85b733951eab9c2f505f030e">max_size</a>())</div>
 <div class="line"><span class="lineno">  316</span>        {</div>
-<div class="line"><span class="lineno">  317</span>          <span class="keywordflow">throw</span> std::length_error(<span class="stringliteral">&quot;Max size exceeded&quot;</span>);  <span class="comment">// NOLINT</span></div>
+<div class="line"><span class="lineno">  317</span>          LLFIO_EXCEPTION_THROW(std::length_error(<span class="stringliteral">&quot;Max size exceeded&quot;</span>));  <span class="comment">// NOLINT</span></div>
 <div class="line"><span class="lineno">  318</span>        }</div>
 <div class="line"><span class="lineno">  319</span>        <a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a158069bbd26f6ffdfeecc6ab89b7094a">size_type</a> current_size = <a class="code hl_function" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a84a6bbb08480b7803a49e203b7501fa0">size</a>();</div>
 <div class="line"><span class="lineno">  320</span>        <a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a158069bbd26f6ffdfeecc6ab89b7094a">size_type</a> bytes = n * <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="structllfio__v2__xxx_1_1algorithm_1_1impl_1_1trivial__vector__impl.html#a6c613e9aeb765304262251d3aa10c945">value_type</a>);</div>

@@ -3763,7 +3763,7 @@ For portability, you can only assume that barriers write order for a single hand
 <p>Note that if the file is currently zero sized, no mapping occurs now, but later when <code>truncate()</code> or <code>update_map()</code> is called.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values which the constructors for <code>file_handle</code>, <code>section_handle</code> and <code>map_handle</code> can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  413</span>  {</div>
-<div class="line"><span class="lineno">  414</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  414</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  415</span>    {</div>
 <div class="line"><span class="lineno">  416</span>      <span class="keywordflow">if</span>(_mode == mode::append)</div>
 <div class="line"><span class="lineno">  417</span>      {</div>
@@ -3789,7 +3789,7 @@ For portability, you can only assume that barriers write order for a single hand
 <div class="line"><span class="lineno">  437</span>      }</div>
 <div class="line"><span class="lineno">  438</span>      }</div>
 <div class="line"><span class="lineno">  439</span>    }</div>
-<div class="line"><span class="lineno">  440</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  440</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  441</span>    {</div>
 <div class="line"><span class="lineno">  442</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  443</span>    }</div>
@@ -3935,14 +3935,14 @@ For portability, you can only assume that barriers write order for a single hand
 <p><em>Securely</em> create a mapped file handle creating a temporary anonymous inode in the filesystem referred to by <em>dirpath</em>. The inode created has no name nor accessible path on the filing system and ceases to exist as soon as the last handle is closed, making it ideal for use as a temporary file where other processes do not need to have access to its contents via some path on the filing system (a classic use case is for backing shared memory maps).</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX open() or CreateFile() can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  524</span>  {</div>
-<div class="line"><span class="lineno">  525</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  525</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  526</span>    {</div>
 <div class="line"><span class="lineno">  527</span>      OUTCOME_TRY(<span class="keyword">auto</span> &amp;&amp;v, <a class="code hl_function" href="classllfio__v2__xxx_1_1file__handle.html#ad3b3a68354ad5bf299581423a97bfb7a">file_handle::temp_inode</a>(dir, _mode, _caching, flags));</div>
 <div class="line"><span class="lineno">  528</span>      <a class="code hl_function" href="classllfio__v2__xxx_1_1mapped__file__handle.html#a4aa124e03ec6376c70d9e07c548d0d44">mapped_file_handle</a> ret(std::move(v), sflags, 0);</div>
 <div class="line"><span class="lineno">  529</span>      ret._reservation = reservation;</div>
 <div class="line"><span class="lineno">  530</span>      <span class="keywordflow">return</span> {std::move(ret)};</div>
 <div class="line"><span class="lineno">  531</span>    }</div>
-<div class="line"><span class="lineno">  532</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  532</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  533</span>    {</div>
 <div class="line"><span class="lineno">  534</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  535</span>    }</div>
@@ -4011,7 +4011,7 @@ For portability, you can only assume that barriers write order for a single hand
 <p>Create an mapped file handle creating a uniquely named file on a path. The file is opened exclusively with <code>creation::only_if_not_exist</code> so it will never collide with nor overwrite any existing file. Note also that caching defaults to temporary which hints to the OS to only flush changes to physical storage as lately as possible.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX open() or CreateFile() can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  466</span>  {</div>
-<div class="line"><span class="lineno">  467</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  467</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  468</span>    {</div>
 <div class="line"><span class="lineno">  469</span>      <span class="keywordflow">for</span>(;;)</div>
 <div class="line"><span class="lineno">  470</span>      {</div>
@@ -4024,7 +4024,7 @@ For portability, you can only assume that barriers write order for a single hand
 <div class="line"><span class="lineno">  477</span>        }</div>
 <div class="line"><span class="lineno">  478</span>      }</div>
 <div class="line"><span class="lineno">  479</span>    }</div>
-<div class="line"><span class="lineno">  480</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  480</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  481</span>    {</div>
 <div class="line"><span class="lineno">  482</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  483</span>    }</div>
@@ -4792,12 +4792,12 @@ For portability, you can only assume that barriers write order for a single hand
 </table>
 </div><div class="memdoc">
 <div class="fragment"><div class="line"><span class="lineno">  624</span>  {</div>
-<div class="line"><span class="lineno">  625</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  625</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  626</span>    {</div>
 <div class="line"><span class="lineno">  627</span>      OUTCOME_TRY(<span class="keyword">auto</span> &amp;&amp;fh, <a class="code hl_function" href="classllfio__v2__xxx_1_1file__handle.html#aea633deacad3c4a673eebe3aa3e1c814">file_handle::reopen</a>(mode_, caching_, d));</div>
 <div class="line"><span class="lineno">  628</span>      <span class="keywordflow">return</span> <a class="code hl_function" href="classllfio__v2__xxx_1_1mapped__file__handle.html#a4aa124e03ec6376c70d9e07c548d0d44">mapped_file_handle</a>(std::move(fh), reservation, _sh.<a class="code hl_function" href="classllfio__v2__xxx_1_1section__handle.html#a99bb38a023cb0cb486e6210485cc1ca4">section_flags</a>(), _offset + offset);</div>
 <div class="line"><span class="lineno">  629</span>    }</div>
-<div class="line"><span class="lineno">  630</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  630</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  631</span>    {</div>
 <div class="line"><span class="lineno">  632</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  633</span>    }</div>
@@ -6625,7 +6625,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <p>Create a file handle creating a uniquely named file on a path. The file is opened exclusively with <code>creation::only_if_not_exist</code> so it will never collide with nor overwrite any existing file. Note also that caching defaults to temporary which hints to the OS to only flush changes to physical storage as lately as possible.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX open() or CreateFile() can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  177</span>  {</div>
-<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  178</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  179</span>    {</div>
 <div class="line"><span class="lineno">  180</span>      <span class="keywordflow">for</span>(;;)</div>
 <div class="line"><span class="lineno">  181</span>      {</div>
@@ -6638,7 +6638,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <div class="line"><span class="lineno">  188</span>        }</div>
 <div class="line"><span class="lineno">  189</span>      }</div>
 <div class="line"><span class="lineno">  190</span>    }</div>
-<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  191</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  192</span>    {</div>
 <div class="line"><span class="lineno">  193</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  194</span>    }</div>

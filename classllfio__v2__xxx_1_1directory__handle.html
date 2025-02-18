@@ -3492,7 +3492,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <p>Create a directory handle creating a uniquely named file on a path. The file is opened exclusively with <code>creation::only_if_not_exist</code> so it will never collide with nor overwrite any existing entry.</p>
 <dl class="section user"><dt>Errors returnable\n Any of the values POSIX open() or CreateFile() can return.</dt><dd></dd></dl>
 <div class="fragment"><div class="line"><span class="lineno">  317</span>  {</div>
-<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">try</span></div>
+<div class="line"><span class="lineno">  318</span>    LLFIO_EXCEPTION_TRY</div>
 <div class="line"><span class="lineno">  319</span>    {</div>
 <div class="line"><span class="lineno">  320</span>      <span class="keywordflow">for</span>(;;)</div>
 <div class="line"><span class="lineno">  321</span>      {</div>
@@ -3504,7 +3504,7 @@ template&lt;class... Args, class Clock , class Duration &gt; </div>
 <div class="line"><span class="lineno">  327</span>        }</div>
 <div class="line"><span class="lineno">  328</span>      }</div>
 <div class="line"><span class="lineno">  329</span>    }</div>
-<div class="line"><span class="lineno">  330</span>    <span class="keywordflow">catch</span>(...)</div>
+<div class="line"><span class="lineno">  330</span>    LLFIO_EXCEPTION_CATCH_ALL</div>
 <div class="line"><span class="lineno">  331</span>    {</div>
 <div class="line"><span class="lineno">  332</span>      <span class="keywordflow">return</span> error_from_exception();</div>
 <div class="line"><span class="lineno">  333</span>    }</div>

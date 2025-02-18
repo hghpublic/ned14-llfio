@@ -323,12 +323,12 @@ template&lt;typename T &gt; </div>
 <div class="fragment"><div class="line"><span class="lineno">  409</span>    {</div>
 <div class="line"><span class="lineno">  410</span>      <span class="keywordflow">if</span>(n &gt; max_size())</div>
 <div class="line"><span class="lineno">  411</span>      {</div>
-<div class="line"><span class="lineno">  412</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><span class="lineno">  412</span>        LLFIO_EXCEPTION_THROW(std::bad_alloc());</div>
 <div class="line"><span class="lineno">  413</span>      }</div>
 <div class="line"><span class="lineno">  414</span>      <span class="keyword">auto</span> mem(detail::allocate_large_pages(n * <span class="keyword">sizeof</span>(T)));</div>
 <div class="line"><span class="lineno">  415</span>      <span class="keywordflow">if</span>(mem.p == <span class="keyword">nullptr</span>)</div>
 <div class="line"><span class="lineno">  416</span>      {</div>
-<div class="line"><span class="lineno">  417</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><span class="lineno">  417</span>        LLFIO_EXCEPTION_THROW(std::bad_alloc());</div>
 <div class="line"><span class="lineno">  418</span>      }</div>
 <div class="line"><span class="lineno">  419</span>      <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>pointer<span class="keyword">&gt;</span>(mem.p);</div>
 <div class="line"><span class="lineno">  420</span>    }</div>
@@ -414,7 +414,7 @@ template&lt;typename T &gt; </div>
 <div class="fragment"><div class="line"><span class="lineno">  423</span>    {</div>
 <div class="line"><span class="lineno">  424</span>      <span class="keywordflow">if</span>(n &gt; max_size())</div>
 <div class="line"><span class="lineno">  425</span>      {</div>
-<div class="line"><span class="lineno">  426</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><span class="lineno">  426</span>        LLFIO_EXCEPTION_THROW(std::bad_alloc());</div>
 <div class="line"><span class="lineno">  427</span>      }</div>
 <div class="line"><span class="lineno">  428</span>      detail::deallocate_large_pages(p, n * <span class="keyword">sizeof</span>(T));</div>
 <div class="line"><span class="lineno">  429</span>    }</div>
